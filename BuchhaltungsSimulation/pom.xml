@@ -7,10 +7,9 @@
   
 	<parent>
 		<groupId>thomas.nill</groupId>
-		<artifactId>hauptPOM</artifactId>
+		<artifactId>HauptPOM</artifactId>
 		<version>1.0</version>
-		<relativePath>../generell/maven/pom.xml</relativePath>
-	</parent>
+		</parent>
 	
  
 	<groupId>thomas.nill</groupId>
