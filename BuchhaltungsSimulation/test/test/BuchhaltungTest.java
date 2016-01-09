@@ -28,7 +28,7 @@ public class BuchhaltungTest {
 	}
 
 	@Test
-	public void testCreateDocument1() {
+	public void testBuchungen() {
 		EinfacheBuchungsFabrik fabrik = new EinfacheBuchungsFabrik(100,200,20.20);
 		fabrik.setArt(2);
 		Buchung buchung = fabrik.createBuchung();
@@ -45,13 +45,17 @@ public class BuchhaltungTest {
 		Assert.assertEquals("Betrag 1",-20.20,b200.getBetrag(),0.001);
 	}
 
-	@Test
-	public void testCreateDocument2() {
+	
+	public static void testCreateKontoPanel() {
 		JFrame  f = new JFrame();
 		KontoPanel kp = new KontoPanel(new BewegungRenderer());
 		kp.setKonto(DB.getKonto(100));
 		f.getContentPane().add(kp);
 		f.setSize(100,200);
 		f.setVisible(true);
+	}
+	
+	public static void main(String args) {
+		testCreateKontoPanel();
 	}
 }
