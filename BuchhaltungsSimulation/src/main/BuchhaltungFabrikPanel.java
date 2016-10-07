@@ -1,7 +1,7 @@
 package main;
 
 import java.awt.event.MouseEvent;
-import java.util.Vector;
+import java.util.List;
 
 import javax.swing.JButton;
 
@@ -16,20 +16,19 @@ import buchungsfabriken.BuchungsFabrik;
  * 
  */
 public class BuchhaltungFabrikPanel extends BuchungsFabrikPanel {
-	private static final long serialVersionUID = 7655704756631710239L;
+    private static final long serialVersionUID = 7655704756631710239L;
 
+    public BuchhaltungFabrikPanel(List<BuchungsFabrik> fabriken) {
+        super(fabriken);
+    }
 
-	public BuchhaltungFabrikPanel(Vector<BuchungsFabrik> fabriken) {
-		super(fabriken);
-	}
+    @Override
+    public void mouseEntered(MouseEvent arg0) {
+        JButton b = (JButton) arg0.getComponent();
+        BuchungsFabrik f = (BuchungsFabrik) b.getAction();
+        MainFrame.getMainFrame().setKonten(f.getKontonummern().get(0),
+                f.getKontonummern().get(1));
 
-	@Override
-	public void mouseEntered(MouseEvent arg0) {
-		JButton b = (JButton) arg0.getComponent();
-		BuchungsFabrik f = (BuchungsFabrik) b.getAction();
-		MainFrame.setKonten(f.getKontonummern().get(0), f
-				.getKontonummern().get(1));
-
-	}
+    }
 
 }

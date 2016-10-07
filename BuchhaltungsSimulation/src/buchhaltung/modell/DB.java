@@ -1,7 +1,7 @@
 package buchhaltung.modell;
 
-import java.util.Vector;
-
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * In Memory "Datenbanktabelle" der Konten
@@ -10,24 +10,24 @@ import java.util.Vector;
  * 
  */
 public class DB {
-	private static Vector<Konto> konten = new Vector<Konto>();
+    private static List<Konto> konten = new ArrayList<Konto>();
 
-	public static Konto getKonto(int nr) {
-		for (Konto k : konten) {
-			if (k.getNr() == nr) {
-				return k;
-			}
-		}
-		return null;
-	}
+    public static Konto getKonto(int nr) {
+        for (Konto k : konten) {
+            if (k.getNr() == nr) {
+                return k;
+            }
+        }
+        return null;
+    }
 
-	public static void insert(Konto konto) {
-		if (konto != null && getKonto(konto.getNr()) == null) {
-			konten.addElement(konto);
-		}
-	}
+    public static void insert(Konto konto) {
+        if (konto != null && getKonto(konto.getNr()) == null) {
+            konten.add(konto);
+        }
+    }
 
-	public static Vector<Konto> getKonten() {
-		return konten;
-	}
+    public static List<Konto> getKonten() {
+        return konten;
+    }
 }
