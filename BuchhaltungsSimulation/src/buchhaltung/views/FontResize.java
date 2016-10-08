@@ -18,67 +18,26 @@ import javax.swing.plaf.FontUIResource;
  */
 public class FontResize extends AbstractAction {
     private static final long serialVersionUID = -8497261599407576036L;
-
-    private static float scale = 0.0f;
     private boolean verkleinern = true;
+    private FontScale scale;
 
-    public FontResize(boolean verkleinern) {
+    public FontResize(boolean verkleinern,FontScale scale) {
         super((verkleinern) ? "Schrift--" : "Schrift++");
         this.verkleinern = verkleinern;
+        this.scale = scale;
     }
 
     @Override
     public void actionPerformed(ActionEvent arg0) {
-        fontResize(scale *= ((verkleinern) ? 1 / 1.2 : 1.2));
+        scale.expand((verkleinern) ? 1 / 1.2f : 1.2f);
     }
 
-    public synchronized static void initFontScale() {
-        int screenRes = Toolkit.getDefaultToolkit().getScreenResolution();
-        int fontSize = (int) Math.round(12.0 * screenRes / 72.0);
-        Font font = getFont();
 
-        scale = fontSize / font.getSize2D();
-        fontResize(scale);
+    public  float getFontScale() {
+        return scale.getScale();
     }
 
-    public synchronized static float getFontScale() {
-        if (scale <= 0.01f) {
-            initFontScale();
-        }
-        return scale;
-    }
+ 
 
-    private synchronized static void fontResize(float scale) {
-        UIDefaults defaults = UIManager.getDefaults();
-        Enumeration<Object> keys = defaults.keys();
-        while (keys.hasMoreElements()) {
-            Object key = keys.nextElement();
-            Object value = defaults.get(key);
-            if (value != null && value instanceof Font) {
-                UIManager.put(key, null);
-                Font font = UIManager.getFont(key);
-                if (font != null) {
-                    float size = font.getSize2D();
-                    UIManager.put(key,
-                            new FontUIResource(font.deriveFont(size * scale)));
-                }
-            }
-        }
-    }
-
-    private synchronized static Font getFont() {
-        UIDefaults defaults = UIManager.getDefaults();
-        Enumeration<Object> keys = defaults.keys();
-        while (keys.hasMoreElements()) {
-            Object key = keys.nextElement();
-            Object value = defaults.get(key);
-            if (value != null && value instanceof Font) {
-                Font font = UIManager.getFont(key);
-                if (font != null) {
-                    return font;
-                }
-            }
-        }
-        return null;
-    }
+ 
 }

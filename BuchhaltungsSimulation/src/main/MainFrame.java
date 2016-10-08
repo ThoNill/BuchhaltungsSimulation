@@ -18,6 +18,7 @@ import buchhaltung.modell.Konto;
 import buchhaltung.modell.Neustart;
 import buchhaltung.views.BuchungsFabrikPanel;
 import buchhaltung.views.FontResize;
+import buchhaltung.views.FontScale;
 import buchhaltung.views.KontoPanel;
 import buchungsfabriken.BuchungsFabrik;
 import buchungsfabriken.EinfacheBuchungsFabrik;
@@ -33,8 +34,9 @@ public class MainFrame extends JFrame {
     private static final long serialVersionUID = -4886328326638275741L;
     private KontoPanel kp1;
     private KontoPanel kp2;
-    private MainFrameResize sizePlus = new MainFrameResize(true, this);
-    private MainFrameResize sizeMinus = new MainFrameResize(false, this);
+    private static final FontScale scale = new FontScale();;
+    private MainFrameResize sizePlus;
+    private MainFrameResize sizeMinus;
 
     private static MainFrame mFrame;
 
@@ -49,7 +51,10 @@ public class MainFrame extends JFrame {
 
     public MainFrame() {
         super();
-        FontResize.initFontScale();
+      
+        sizePlus = new MainFrameResize(true,this,scale);
+        sizeMinus = new MainFrameResize(false,this,scale);
+        
         initialisiereKonten();
 
         JScrollPane aktionsPanel = createAktionsPanel();
@@ -103,7 +108,7 @@ public class MainFrame extends JFrame {
         kontenPanel.setLayout(new BoxLayout(kontenPanel, BoxLayout.Y_AXIS));
 
         for (Konto konto : DB.getKonten()) {
-            KontoPanel kp = new KontoPanel(new BewegungRenderer(), sizePlus);
+            KontoPanel kp = new KontoPanel(new BewegungRenderer(), scale);
             kp.setKonto(konto);
             kp.init();
             kontenPanel.add(kp);
@@ -114,11 +119,11 @@ public class MainFrame extends JFrame {
     private JPanel createKasseKundePanel() {
         JPanel kontenPanel = new JPanel();
         kontenPanel.setLayout(new BoxLayout(kontenPanel, BoxLayout.X_AXIS));
-        kp1 = new KontoPanel(new BewegungRenderer(), sizePlus);
+        kp1 = new KontoPanel(new BewegungRenderer(), scale);
         kp1.setKonto(DB.getKonto(KontenName.Kasse.getNr()));
         kp1.init();
         kontenPanel.add(kp1);
-        kp2 = new KontoPanel(new BewegungRenderer(), sizePlus);
+        kp2 = new KontoPanel(new BewegungRenderer(), scale);
         kp2.setKonto(DB.getKonto(KontenName.Kunde.getNr()));
         kp2.init();
         kontenPanel.add(kp2);

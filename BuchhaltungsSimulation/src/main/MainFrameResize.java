@@ -5,12 +5,13 @@ import java.awt.event.ActionEvent;
 import javax.swing.JFrame;
 
 import buchhaltung.views.FontResize;
+import buchhaltung.views.FontScale;
 
 public class MainFrameResize extends FontResize {
     private JFrame frame;
 
-    public MainFrameResize(boolean verkleinern, JFrame frame) {
-        super(verkleinern);
+    public MainFrameResize(boolean verkleinern, JFrame frame,FontScale scale) {
+        super(verkleinern, scale);
         this.frame = frame;
 
     }

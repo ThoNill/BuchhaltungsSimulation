@@ -28,17 +28,18 @@ public class KontoPanel extends JPanel implements PropertyChangeListener {
     private JLabel kontoname = new JLabel();
     private JTable tabelle = new JTable();
     private transient TableCellRenderer cellRenderer;
-    private FontResize resize;
+    private FontScale scale;
 
-    public KontoPanel(TableCellRenderer cellRenderer, FontResize resize) {
+    public KontoPanel(TableCellRenderer cellRenderer, FontScale scale) {
         super();
         this.cellRenderer = cellRenderer;
+        this.scale = scale;
     }
 
     public void init() {
         tabelle.setIntercellSpacing(new Dimension(5, 5));
         tabelle.setRowHeight((int) (tabelle.getRowHeight()
-                * FontResize.getFontScale() * 1.5));
+                * scale.getScale() * 1.5));
         kontoname.setBorder(new EtchedBorder(4));
 
         setBorder(new EtchedBorder(4));

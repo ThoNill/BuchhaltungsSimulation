@@ -6,6 +6,7 @@ import main.BewegungRenderer;
 import buchhaltung.modell.DB;
 import buchhaltung.modell.Konto;
 import buchhaltung.views.FontResize;
+import buchhaltung.views.FontScale;
 import buchhaltung.views.KontoPanel;
 import buchungsfabriken.EinfacheBuchungsFabrik;
 
@@ -25,7 +26,7 @@ public class BuchhaltungVisible {
         fabrik.createBuchung();
 
         JFrame f = new JFrame();
-        KontoPanel kp = new KontoPanel(new BewegungRenderer(),new FontResize(true));
+        KontoPanel kp = new KontoPanel(new BewegungRenderer(),new FontScale());
         kp.setKonto(DB.getKonto(100));
         kp.init();
         f.getContentPane().add(kp);

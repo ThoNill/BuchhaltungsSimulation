@@ -16,6 +16,7 @@ import buchhaltung.modell.Buchung;
 import buchhaltung.modell.DB;
 import buchhaltung.modell.Konto;
 import buchhaltung.views.FontResize;
+import buchhaltung.views.FontScale;
 import buchhaltung.views.KontoPanel;
 import buchungsfabriken.EinfacheBuchungsFabrik;
 
@@ -49,7 +50,7 @@ public class BuchhaltungTest {
 
     public static void testCreateKontoPanel() {
         JFrame f = new JFrame();
-        KontoPanel kp = new KontoPanel(new BewegungRenderer(),new FontResize(true));
+        KontoPanel kp = new KontoPanel(new BewegungRenderer(),new FontScale());
         kp.setKonto(DB.getKonto(100));
         f.getContentPane().add(kp);
         f.setSize(100, 200);
